@@ -48,9 +48,9 @@ Unlike traditional subscription SaaS products, EduPulse runs **100% locally on y
 ## 🚀 Quick Start (Local Setup)
 
 ```bash
-# Clone the repository
-git clone https://github.com/Ziontyler7/edios-core-clean.git
-cd edios-core-clean/edupulse-teacher-hub
+# Clone the standalone open-source repository
+git clone https://github.com/Ziontyler7/edupulse-teacher-hub.git
+cd edupulse-teacher-hub
 
 # Install dependencies
 npm install
