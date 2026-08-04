@@ -28,6 +28,8 @@ To every teacher testing this in their classroom, every scientist reviewing the 
 
 Both platforms are 100% free and open-source for humanity.
 
+More to come... 🚀✨
+
 🔗 EduPulse Hub: https://github.com/Ziontyler7/edupulse-teacher-hub
 🔗 Cancer Cell Oracle: https://github.com/Ziontyler7/cancer-cell-oracle
 #Education #Oncology #AlphaFold #OpenSource #EdTech #AIForGood #EduPulse`;
