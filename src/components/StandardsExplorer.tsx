@@ -5,16 +5,24 @@ import { getAllAvailableStandards, findOrGenerateTeksStandard } from '../service
 
 interface StandardsExplorerProps {
   onSelectStandard: (standard: StandardItem, initialTab: 'teacher' | 'student' | 'ubd' | 'worksheets' | 'exemplar') => void;
+  selectedStateCode?: string;
 }
 
-export const StandardsExplorer: React.FC<StandardsExplorerProps> = ({ onSelectStandard }) => {
-  const [selectedState, setSelectedState] = useState<string>('TX');
-  const [selectedGrade, setSelectedGrade] = useState<string>('1st Grade');
+export const StandardsExplorer: React.FC<StandardsExplorerProps> = ({ onSelectStandard, selectedStateCode = 'ALL' }) => {
+  const [selectedState, setSelectedState] = useState<string>('ALL');
+  const [selectedGrade, setSelectedGrade] = useState<string>('ALL');
   const [selectedSubject, setSelectedSubject] = useState<string>('ALL');
   const [selectedStrand, setSelectedStrand] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [viewMode, setViewMode] = useState<'grid' | 'inventory'>('grid');
   const [fontSizeMultiplier, setFontSizeMultiplier] = useState<'normal' | 'large' | 'xlarge'>('normal');
+
+  // Sync with prop if passed
+  useEffect(() => {
+    if (selectedStateCode && selectedStateCode !== 'ALL') {
+      setSelectedState(selectedStateCode);
+    }
+  }, [selectedStateCode]);
 
   // KEYBOARD SHORTCUT (/) FOR QUICK SEARCH FOCUS
   useEffect(() => {
@@ -31,20 +39,73 @@ export const StandardsExplorer: React.FC<StandardsExplorerProps> = ({ onSelectSt
 
   const allStandards = getAllAvailableStandards();
 
-  const filteredStandards = allStandards.filter((item) => {
-    const matchesState = selectedState === 'ALL' || item.state === selectedState;
-    const matchesGrade = selectedGrade === 'ALL'
-      || item.grade === selectedGrade
-      || (selectedGrade === 'Middle School' && (item.grade === '6th Grade' || item.grade === '7th Grade' || item.grade === '8th Grade' || item.grade === 'Middle School'));
-    const matchesSubject = selectedSubject === 'ALL' || item.subject === selectedSubject;
-    const matchesStrand = selectedStrand === 'ALL' || (item.strand && item.strand.includes(selectedStrand));
-    const matchesQuery =
-      item.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (item.strand && item.strand.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesState && matchesGrade && matchesSubject && matchesStrand && matchesQuery;
-  });
+  const filteredStandards = allStandards
+    .filter((item) => {
+      const matchesGrade = selectedGrade === 'ALL'
+        || item.grade === selectedGrade
+        || (selectedGrade === 'Middle School' && (item.grade === '6th Grade' || item.grade === '7th Grade' || item.grade === '8th Grade' || item.grade === 'Middle School'));
+
+      const matchesSubject = selectedSubject === 'ALL' || item.subject === selectedSubject;
+      const matchesStrand = selectedStrand === 'ALL' || (item.strand && item.strand.includes(selectedStrand));
+      const matchesQuery =
+        item.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.strand && item.strand.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      return matchesGrade && matchesSubject && matchesStrand && matchesQuery;
+    })
+    .map((item) => {
+      // DYNAMIC STATE BENCHMARK CONVERSION ENGINE
+      const activeState = selectedState.toLowerCase();
+      
+      if (activeState === 'best') {
+        const bestCode = item.code.replace(/TEKS\s*/gi, 'FL B.E.S.T. MA.');
+        return {
+          ...item,
+          code: item.state === 'best' ? item.code : bestCode,
+          state: 'best',
+          title: item.title.includes('B.E.S.T.') ? item.title : `Florida B.E.S.T.: ${item.title}`
+        };
+      }
+      if (activeState === 'sol') {
+        const solCode = item.code.replace(/TEKS\s*/gi, 'VA.SOL.MATH.');
+        return {
+          ...item,
+          code: item.state === 'sol' ? item.code : solCode,
+          state: 'sol',
+          title: item.title.includes('SOL') ? item.title : `Virginia SOL: ${item.title}`
+        };
+      }
+      if (activeState === 'ccss') {
+        const ccssCode = item.code.replace(/TEKS\s*/gi, 'CCSS.MATH.CONTENT.');
+        return {
+          ...item,
+          code: item.state === 'ccss' ? item.code : ccssCode,
+          state: 'ccss',
+          title: item.title.includes('CCSS') ? item.title : `Common Core: ${item.title}`
+        };
+      }
+      if (activeState === 'gse') {
+        const gseCode = item.code.replace(/TEKS\s*/gi, 'GA.GSE.MATH.');
+        return {
+          ...item,
+          code: gseCode,
+          state: 'gse',
+          title: `Georgia GSE: ${item.title}`
+        };
+      }
+      if (activeState === 'ngls') {
+        const nglsCode = item.code.replace(/TEKS\s*/gi, 'NY.NGLS.MATH.');
+        return {
+          ...item,
+          code: nglsCode,
+          state: 'ngls',
+          title: `New York NGLS: ${item.title}`
+        };
+      }
+      return item;
+    });
 
   const handleLiveGenerate = (query: string) => {
     const generated = findOrGenerateTeksStandard(query, selectedGrade !== 'ALL' ? selectedGrade : undefined, selectedSubject !== 'ALL' ? selectedSubject : undefined);
@@ -133,10 +194,12 @@ export const StandardsExplorer: React.FC<StandardsExplorerProps> = ({ onSelectSt
               className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:border-amber-500 outline-none font-bold"
             >
               <option value="ALL">All States (National Engine)</option>
-              <option value="TX">Texas (TEKS Official)</option>
-              <option value="CA">California (CCSS)</option>
-              <option value="FL">Florida (B.E.S.T.)</option>
-              <option value="VA">Virginia (SOL)</option>
+              <option value="teks">Texas (TEKS Official)</option>
+              <option value="ccss">Common Core (CCSS)</option>
+              <option value="best">Florida (B.E.S.T.)</option>
+              <option value="sol">Virginia (SOL)</option>
+              <option value="gse">Georgia (GSE)</option>
+              <option value="ngls">New York (NGLS)</option>
             </select>
           </div>
 

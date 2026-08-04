@@ -234,6 +234,114 @@ export const DeficitDashboard: React.FC = () => {
         </form>
       </div>
 
+      {/* TIER 1 / TIER 2 / TIER 3 AUTO-RETEACH CLUSTERS */}
+      <div className="bg-slate-900/90 border-2 border-amber-500/40 rounded-3xl p-6 shadow-2xl space-y-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center space-x-2">
+              <span className="px-3 py-1 bg-amber-500 text-slate-950 rounded-xl font-mono text-xs font-extrabold">
+                LINK AI ENGINE
+              </span>
+              <span className="text-xs font-bold text-amber-300 font-mono">Automated Small-Group Clustering</span>
+            </div>
+            <h3 className="text-xl font-extrabold text-slate-100 mt-2">
+              Tier 1 / Tier 2 / Tier 3 Reteach & Small Group Clusters
+            </h3>
+            <p className="text-slate-300 text-xs mt-1">
+              Automatically clusters students based on diagnostic performance and generates principal-ready intervention cards.
+            </p>
+          </div>
+
+          <button
+            onClick={() => window.print()}
+            className="flex items-center space-x-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold rounded-xl transition-all shadow-lg shadow-amber-500/20"
+          >
+            <Printer className="w-4 h-4 stroke-[2.5]" />
+            <span>Print Small-Group Reteach Plan</span>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* TIER 3 - INTENSIVE INTERVENTION */}
+          <div className="bg-slate-950 border border-red-500/40 rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-red-500/20 pb-3">
+              <span className="px-3 py-1 bg-red-950 text-red-300 border border-red-500/40 font-mono text-xs font-bold rounded-lg">
+                🔴 Tier 3: Intensive (&lt;60%)
+              </span>
+              <span className="text-xs font-mono text-red-400 font-bold">
+                {roster.filter(s => s.preTestScore < 60).length} Students
+              </span>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-bold text-slate-200 uppercase font-mono">Focus Strategy:</p>
+              <p className="text-xs text-red-200 font-medium bg-red-950/40 p-3 rounded-xl border border-red-900">
+                1-on-1 Concrete Manipulative Touch-Counting & Part-Part-Whole Ten Frames.
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 pl-2 font-mono">
+                {roster.filter(s => s.preTestScore < 60).map(s => (
+                  <li key={s.id} className="flex items-center justify-between">
+                    <span>• {s.name}</span>
+                    <span className="text-red-400 font-bold">{s.preTestScore}%</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* TIER 2 - TARGETED RETEACH */}
+          <div className="bg-slate-950 border border-amber-500/40 rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-amber-500/20 pb-3">
+              <span className="px-3 py-1 bg-amber-950 text-amber-300 border border-amber-500/40 font-mono text-xs font-bold rounded-lg">
+                🟡 Tier 2: Targeted (60-79%)
+              </span>
+              <span className="text-xs font-mono text-amber-400 font-bold">
+                {roster.filter(s => s.preTestScore >= 60 && s.preTestScore < 80).length} Students
+              </span>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-bold text-slate-200 uppercase font-mono">Focus Strategy:</p>
+              <p className="text-xs text-amber-200 font-medium bg-amber-950/40 p-3 rounded-xl border border-amber-900">
+                Guided Small-Group Peer Partner Mat Practice & Missing Addend Diagrams.
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 pl-2 font-mono">
+                {roster.filter(s => s.preTestScore >= 60 && s.preTestScore < 80).map(s => (
+                  <li key={s.id} className="flex items-center justify-between">
+                    <span>• {s.name}</span>
+                    <span className="text-amber-400 font-bold">{s.preTestScore}%</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* TIER 1 - MASTERY & EXTENSION */}
+          <div className="bg-slate-950 border border-emerald-500/40 rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+              <span className="px-3 py-1 bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-mono text-xs font-bold rounded-lg">
+                🟢 Tier 1: Mastery (80-100%)
+              </span>
+              <span className="text-xs font-mono text-emerald-400 font-bold">
+                {roster.filter(s => s.preTestScore >= 80).length} Students
+              </span>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-bold text-slate-200 uppercase font-mono">Focus Strategy:</p>
+              <p className="text-xs text-emerald-200 font-medium bg-emerald-950/40 p-3 rounded-xl border border-emerald-900">
+                DOK Level 4 Real-World Story Problem Writing & Peer Student Mentorship.
+              </p>
+              <ul className="text-xs text-slate-300 space-y-1 pl-2 font-mono">
+                {roster.filter(s => s.preTestScore >= 80).map(s => (
+                  <li key={s.id} className="flex items-center justify-between">
+                    <span>• {s.name}</span>
+                    <span className="text-emerald-400 font-bold">{s.preTestScore}%</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ROSTER TABLE WITH DELETE BUTTON */}
       <div className="bg-slate-900/90 border-2 border-slate-800 rounded-3xl p-6 shadow-2xl overflow-x-auto">
         <table className="w-full text-left text-xs">
@@ -286,3 +394,4 @@ export const DeficitDashboard: React.FC = () => {
     </div>
   );
 };
+

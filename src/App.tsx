@@ -11,8 +11,11 @@ import { DibelsMclassSuite } from './components/DibelsMclassSuite';
 import { StaarDiagnosticSuite } from './components/StaarDiagnosticSuite';
 import { StandardItem, COMPREHENSIVE_STANDARDS } from './data/standardsData';
 
+import { STATE_FRAMEWORKS, StateFramework } from './data/multiStateData';
+
 export function App() {
   const [activeTab, setActiveTab] = useState<'standards' | 'dibels' | 'dashboard' | 'schedule' | 'staar' | 'exchange' | 'kit'>('standards');
+  const [selectedState, setSelectedState] = useState<StateFramework>(STATE_FRAMEWORKS[0]);
   const [selectedStandard, setSelectedStandard] = useState<StandardItem | null>(null);
   const [modalInitialTab, setModalInitialTab] = useState<'teacher' | 'student' | 'ubd' | 'worksheets' | 'exemplar'>('teacher');
   const [printWorksheetId, setPrintWorksheetId] = useState<string | null>(null);
@@ -33,13 +36,18 @@ export function App() {
     <div className="min-h-screen bg-[#070913] text-slate-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
       
       {/* NAVBAR */}
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        selectedState={selectedState}
+        onSelectState={setSelectedState}
+      />
 
       {/* MAIN CONTENT AREA */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-8">
         
         {activeTab === 'standards' && (
-          <StandardsExplorer onSelectStandard={handleSelectStandard} />
+          <StandardsExplorer onSelectStandard={handleSelectStandard} selectedStateCode={selectedState.id} />
         )}
 
         {activeTab === 'staar' && (

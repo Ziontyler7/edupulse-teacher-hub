@@ -235,11 +235,13 @@ export function findOrGenerateTeksStandard(query: string, gradeHint?: string, su
   return generatedItem;
 }
 
+import { NATIVE_MULTI_STATE_STANDARDS } from '../data/multiStateData';
+
 /**
- * Returns all standards combining pre-populated master database + generated cache
+ * Returns all standards combining pre-populated master database + native multi-state + generated cache
  */
 export function getAllAvailableStandards(): TexasTeksItem[] {
-  const list = [...TEXAS_TEKS_MASTER_DATABASE];
+  const list = [...TEXAS_TEKS_MASTER_DATABASE, ...NATIVE_MULTI_STATE_STANDARDS];
   GENERATED_STANDARDS_CACHE.forEach(item => {
     if (!list.some(s => s.code === item.code)) {
       list.push(item);

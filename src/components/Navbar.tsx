@@ -1,13 +1,18 @@
-import React from 'react';
-import { BookOpen, GraduationCap, LayoutDashboard, Calendar, Share2, Sparkles, Printer, Award, Download } from 'lucide-react';
+import React, { useState } from 'react';
+import { BookOpen, GraduationCap, LayoutDashboard, Calendar, Share2, Sparkles, Printer, Award, Download, Globe, ChevronDown } from 'lucide-react';
 import { exportOfflineSurvivalPack } from '../services/survivalPackExporter';
+import { STATE_FRAMEWORKS, StateFramework } from '../data/multiStateData';
 
 interface NavbarProps {
   activeTab: 'standards' | 'dibels' | 'dashboard' | 'schedule' | 'staar' | 'exchange' | 'kit';
   setActiveTab: (tab: 'standards' | 'dibels' | 'dashboard' | 'schedule' | 'staar' | 'exchange' | 'kit') => void;
+  selectedState?: StateFramework;
+  onSelectState?: (state: StateFramework) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, selectedState = STATE_FRAMEWORKS[0], onSelectState }) => {
+  const [showStateDropdown, setShowStateDropdown] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 bg-slate-950/90 border-b border-amber-500/30 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between">
@@ -22,9 +27,41 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
               <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-300 via-amber-100 to-slate-100 bg-clip-text text-transparent">
                 EduPulse
               </span>
-              <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-mono font-bold rounded-md">
-                TEXAS TEA EDITION
-              </span>
+              
+              {/* STATE SELECTOR DROPDOWN */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowStateDropdown(!showStateDropdown)}
+                  className={`flex items-center space-x-1.5 px-2 py-0.5 border text-[10px] font-mono font-bold rounded-md transition-all ${selectedState.badgeColor}`}
+                >
+                  <Globe className="w-3 h-3" />
+                  <span>{selectedState.code}</span>
+                  <ChevronDown className="w-3 h-3 opacity-60" />
+                </button>
+
+                {showStateDropdown && (
+                  <div className="absolute top-full left-0 mt-1 w-56 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-2 z-50 space-y-1">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2 py-1">Select State Standard</p>
+                    {STATE_FRAMEWORKS.map((state) => (
+                      <button
+                        key={state.id}
+                        onClick={() => {
+                          if (onSelectState) onSelectState(state);
+                          setShowStateDropdown(false);
+                        }}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors ${
+                          selectedState.id === state.id ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40' : 'text-slate-300 hover:bg-slate-800'
+                        }`}
+                      >
+                        <div>
+                          <p className="font-bold">{state.name}</p>
+                          <p className="text-[10px] text-slate-400">{state.region}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <p className="text-[11px] text-slate-400 font-medium hidden sm:block">
               Sovereign Educator & District Intelligence Hub
