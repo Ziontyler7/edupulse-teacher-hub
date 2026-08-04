@@ -9,17 +9,22 @@ export const PublicDropKit: React.FC = () => {
 
 Preparation, freedom of information, and cutting-edge intelligence in education AND scientific research should NEVER be locked behind paywalls.
 
-Tonight, we are officially dropping a dual open-source release:
+Tonight, we are officially dropping a dual open-source prototype release:
 
-1️⃣ EduPulse V2 — Sovereign Educator Intelligence & Student Mastery Hub
+1️⃣ EduPulse V2 (Prototype) — Sovereign Educator Intelligence & Student Mastery Hub
 ✨ Nationwide Multi-State Expansion across Texas TEKS, Common Core CCSS, Florida B.E.S.T., Virginia SOL, Georgia GSE, and New York NGLS.
 ✨ Link AI Tier 1/2/3 Small-Group Reteach Engine & 1-click printable intervention plans.
 ✨ STAAR 2.0 & State Interactive Exam Simulator with auto-grading and misconception rationales.
 
-2️⃣ Cancer Cell Science Oracle & Oncology Target Discovery Console
+2️⃣ Cancer Cell Science Oracle (Prototype) — Oncology Target Discovery Console
 🔬 3D Translucent WebGL Cell Visualizer featuring real-time oncogenic membrane deformation in Cancer Driver State vs Normal Cell State.
 🔬 AlphaFold 3D Structural Confidence (pLDDT) & AlphaGenome Pathogenicity Analysis for TP53, EGFR, BRAF, and KRAS.
 🔬 ChEMBL / PubChem Small-Molecule Target Validation cards with 12 nM binding affinity IC50 curves and live pathway intercept simulation.
+
+📌 A Note on Prototype Status & Feedback:
+Both platforms are early-stage open-source prototypes built for public good. Every piece of feedback, feature request, or dataset suggestion from educators, researchers, and developers will be actively used to upgrade and refine future iterations.
+
+To every teacher testing this in their classroom, every scientist reviewing the genomic target cards, and everyone sharing this with their network — thank you from the bottom of my heart. 
 
 Both platforms are 100% free and open-source for humanity.
 
