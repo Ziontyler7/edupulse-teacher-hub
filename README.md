@@ -18,45 +18,55 @@ Unlike traditional subscription SaaS products, EduPulse runs **100% locally on y
 
 ## 🏛️ Core 4-Pillar Feature Suite
 
-### 1. 📚 Master TEKS & State Standards Registry & 14-Point Pedagogy Engine
-- **1,381 Pre-Seeded Elementary TEKS Sub-Bullets** across Kindergarten, 1st Grade, 2nd Grade, 3rd Grade, 4th Grade, and 5th Grade.
-- **Complete Coverage**: Mathematics, Reading/ELA, Science, Social Studies, Health, PE, and Fine Arts.
-- **14-Point Pedagogy Cards**: Every standard includes an NES 5-Stage Lesson Engine, DOK 1–4 Questions, TELPAS 4-Tier Language Scaffolds, SPED Accommodations, mCLASS DIBELS Alignment, and Printable DOL Mini-Quiz Worksheets.
+### 1. 📚 Master Standards Registry & 12-Section Instructional Intelligence
+- **1,392 Pre-Seeded Standards**: 1,381 Authentic TEA Elementary TEKS (K–5) plus Secondary & High School benchmarks.
+- **Complete Subject Coverage**: Mathematics, Reading/ELA, Natural Sciences, and Social Studies / History / Civics.
+- **12-Section Pedagogy Dossiers**: SWBAT Objectives, 4-Phase Gradual Release Model, 3-Stage UbD Backward Design, Webb's DOK 1–4 Questions, CRA Teacher Scaffolding & Misconception Pathways, Student Visual Anchor Charts, Formative Assessment Exemplars, and Real-World Connections.
 
-### 2. 📄 One-Click PDF Export Engine
-- **1-Click Teacher Cards**: Export clean 1-page executive pedagogy cards for lesson planning.
-- **1-Click Student Worksheets**: Export printable Demonstration of Learning (DOL) mini-quiz worksheets complete with school headers and student problem work boxes.
+### 2. 📊 Official TEA 2026 STAAR Test Blueprints & NQT Simulator
+- Exact TEA 2026 Blueprint breakdowns across Elementary Math/Science, Middle School Social Studies, High School Biology EOC, and U.S. History EOC.
+- Enforces state-mandated 60%–65% Readiness Standard weighting and $\ge 25\%$ New Question Types (NQT).
+- Interactive assessment sandbox testing Inline Choice, Drag-and-Drop, Hot Spot, and Short Constructed Response (SCR).
 
-### 3. 🧪 STAAR 2.0 & State Diagnostic Suite
-- Auto-generates 5-question student diagnostic sets across all **5 new question types**:
-  1. *Inline Choice*
-  2. *Hot Spot*
-  3. *Drag-and-Drop*
-  4. *Short Constructed Response (SCR)*
-  5. *Multipart*
-- Real-time auto-grading, score tracking, misconception rationales, and small-group reteach recommendations.
+### 3. 🧩 SPED Clinical Suite & Automated SMART IEP Goal Engineer
+- 8 IDEA Clinical Disability Profiles (ASD, ADHD, Dyslexia, Dysgraphia, Dyscalculia, SLI, ED, OHI).
+- Automated SMART IEP Goal Engineer generating standards-aligned measurable annual goals and PLAAFP statements.
+- Positive Behavior Intervention Plan (BIP) ABC tracker.
 
-### 4. 🗓️ Adaptive 5-Day Weekly Pacing Planner & YAG Export
-- Monday–Friday interactive TEKS assignment dropdowns.
-- `📄 Export Weekly Schedule (PDF)` button generating a principal-ready executive 5-day pacing schedule for submission.
+### 4. 🌐 TELPAS Emergent Bilingual (EB) Language Scaffolding
+- 4-Tier Language Proficiency Descriptors (Beginning, Intermediate, Advanced, Advanced High) across Listening, Speaking, Reading, and Writing.
+- Scaffolding Engine with tiered sentence stems, bilingual Spanish cognates, and vocabulary cards.
 
-### 5. 📦 Offline Educator Survival Pack Exporter
-- Export a standalone 100% self-contained JSON dataset containing all standards and 14-point pedagogy stacks for zero-Wi-Fi classroom environments.
+### 5. 🏆 STAAR Alternate 2 (3-Tier Stimulus Cueing)
+- Standardized TEA 3-Tier cueing protocol (Level 3: 2 pts, Level 2: 1 pt, Level 1: 0 pts).
+
+### 6. 🎛️ Classroom Accessibility Tools & 1-Click Exporter
+- 26-Tile AAC Speech-Output Board with text-to-speech engine.
+- Visual Schedule Builder and Dyslexia / High-Contrast overlays.
+- 1-Click printable lesson plan exporter.
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+## 🚀 Quick Start (What is my URL?)
+
+When you download or clone EduPulse, it runs completely on your local machine:
 
 ```bash
-# Clone the standalone open-source repository
+# 1. Clone the repository
 git clone https://github.com/Ziontyler7/edupulse-teacher-hub.git
 cd edupulse-teacher-hub
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Run dev server
+# 3. Start the local server
 npm run dev
+```
+
+### 🌐 Your URL:
+* **Local Terminal / Browser**: Open **`http://localhost:3000`** (or `http://localhost:5173`)
+* **When Deployed to the Web**: Open your custom root URL (e.g. `https://edupulse.app`, `https://your-district.vercel.app`, or `https://[username].github.io/edupulse`).
+* **Distraction-Free**: Boots directly to `/` with zero extraneous sidebars or tabs.
 
 # Or build & serve production bundle
 npm run build
