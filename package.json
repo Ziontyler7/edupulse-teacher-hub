@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NeoinTheMatrix/edupulse-teacher-hub.git"
+    "url": "https://github.com/Ziontyler7/edupulse-teacher-hub.git"
   },
   "scripts": {
     "dev": "vite --host --port 3000",
