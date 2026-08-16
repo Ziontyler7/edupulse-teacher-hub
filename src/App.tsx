@@ -41,6 +41,7 @@ import { SpedEbLessonExporter } from "./components/SpedEbLessonExporter";
 import { MASTER_STANDARDS_CATALOG, DISABILITY_PROFILES } from "./components/spedEbMasterData";
 import { findOrGenerateTeksStandard } from "./components/standardsCatalog";
 import { StandardItem, AccessibilitySettings, DisabilityCategory } from "./components/types";
+import edupulseIcon from "./assets/edupulse_icon.jpg";
 
 export function App() {
   const [viewMode, setViewMode] = useState<"portal" | "workspace">("portal");
@@ -228,7 +229,7 @@ export function App() {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-cyan-500/20 border border-cyan-500/30 flex-shrink-0 bg-slate-950">
                 <img 
-                  src="/assets/edupulse_icon.jpg" 
+                  src={edupulseIcon} 
                   alt="EduPulse Sovereign Icon" 
                   className="w-full h-full object-cover"
                 />
@@ -492,7 +493,7 @@ export function App() {
               </Button>
               <div className="w-8 h-8 rounded-xl overflow-hidden border border-cyan-500/30 flex-shrink-0 bg-slate-950 hidden sm:block">
                 <img 
-                  src="/assets/edupulse_icon.jpg" 
+                  src={edupulseIcon} 
                   alt="EduPulse" 
                   className="w-full h-full object-cover"
                 />
